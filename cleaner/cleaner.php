@@ -1,6 +1,7 @@
 <?php
 
 include('../Classes/PHPexcel.php');
+require_once('utils.php');
 
 if ( isset($_FILES['uploadfile']) ){
 	
@@ -25,7 +26,8 @@ if ( isset($_FILES['uploadfile']) ){
 		$rows = array_slice($table,1);
 		//~ var_dump($rows);
 		foreach($rows as $row ) {
-			echo $row[$column_num],'<br>';
+			$number = $row[$column_num];
+			echo $number,' ',cleanNumber($nuber),'<br>';
 		}
 	}
 	
