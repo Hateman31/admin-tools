@@ -9,19 +9,24 @@ if ( isset($_FILES['uploadfile']) ){
 	$obj->setActiveSheetIndex(0);
 	$table = $obj->getActiveSheet()->toArray();
 	
-	//~ 1) столбца 'COMMENT' нет
 	//~ 2) в перой строке нет имен
 	//~ ***
 	$column_num = -1;
 	foreach( $table[0] as $key=>$name ) {
 		if (mb_strtoupper($name) == 'COMMENT') {
-			$column_id = $key;
+			$column_num = $key;
+			echo $key,' ',$name,'<br>';
 			break;
 		}
 	}	
-	
-	foreach( array_slice($table,1) as $row ) {
-		echo $row[column_id];
+	if ($column_num == -1) {
+		echo "Comment are not found!";
+	} else {
+		$rows = array_slice($table,1);
+		//~ var_dump($rows);
+		foreach($rows as $row ) {
+			echo $row[$column_num],'<br>';
+		}
 	}
 	
 } else {
