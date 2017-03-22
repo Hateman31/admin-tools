@@ -16,7 +16,6 @@ if ( isset($_FILES['uploadfile']) ){
 	foreach( $table[0] as $key=>$name ) {
 		if (mb_strtoupper($name) == 'COMMENT') {
 			$column_num = $key;
-			//~ echo $key,' ',$name,'<br>';
 			break;
 		}
 	}	
@@ -24,16 +23,24 @@ if ( isset($_FILES['uploadfile']) ){
 		echo "Comment are not found!";
 	} else {
 		$rows = array_slice($table,1);
-		//~ var_dump($rows);
-		//~ проверить, что ячейка не пустая
 		foreach($rows as $row ) {
 			$number = $row[$column_num];
-			if (strlen($number) ) 				
-				//~ echo $number,' ',cleanNumber($number),'<br>';
-				echo $number,' => ',cleanNumber($number),'<br>';
+			if (strlen($number)) {
+				//~ (495) 797-87-11 , 796-90-47 => 49579787117969047 
+				$res = str_replace(array(',','\n'),';',$number);
+				if( strpos(';',$res) !== false ) {
+					$new_number = '';
+					foreach(explode(';',$res) as $token) {
+						$new_number .= cleanNumber($token);
+						$new_number = $new_number.';'; 
+					}	
+				} else {
+					$new_number = cleanNumber($number);
+				}
+				echo $number,' => ',$new_number,' <br>';
+			}
 		}
 	}
-	
 } else {
 	die("Error!");
 }

@@ -2,12 +2,8 @@
 	
 function cleanNumber($number) {
 	
-	$res = $number;
-	
-	$res = str_replace(array(',','\n'),';',$res);
-	
-	
-
-	return $res;
+	preg_match_all('!\d+!', $number, $matches);
+	return preg_replace('/[^0-9]+/', '', $number);
+	//~ return filter_var($number, FILTER_SANITIZE_NUMBER_INT);
 	
 }
