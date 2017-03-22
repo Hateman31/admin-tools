@@ -16,7 +16,7 @@ if ( isset($_FILES['uploadfile']) ){
 	foreach( $table[0] as $key=>$name ) {
 		if (mb_strtoupper($name) == 'COMMENT') {
 			$column_num = $key;
-			echo $key,' ',$name,'<br>';
+			//~ echo $key,' ',$name,'<br>';
 			break;
 		}
 	}	
@@ -25,9 +25,12 @@ if ( isset($_FILES['uploadfile']) ){
 	} else {
 		$rows = array_slice($table,1);
 		//~ var_dump($rows);
+		//~ проверить, что ячейка не пустая
 		foreach($rows as $row ) {
 			$number = $row[$column_num];
-			echo $number,' ',cleanNumber($nuber),'<br>';
+			if (strlen($number) ) 				
+				//~ echo $number,' ',cleanNumber($number),'<br>';
+				echo $number,' => ',cleanNumber($number),'<br>';
 		}
 	}
 	
