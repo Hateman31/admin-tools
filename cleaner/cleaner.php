@@ -26,17 +26,7 @@ if ( isset($_FILES['uploadfile']) ){
 		foreach($rows as $row ) {
 			$number = $row[$column_num];
 			if (strlen($number)) {
-				//~ (495) 797-87-11 , 796-90-47 => 49579787117969047 
-				$res = str_replace(array(',','\n'),';',$number);
-				if( strpos(';',$res) !== false ) {
-					$new_number = '';
-					foreach(explode(';',$res) as $token) {
-						$new_number .= cleanNumber($token);
-						$new_number = $new_number.';'; 
-					}	
-				} else {
-					$new_number = cleanNumber($number);
-				}
+				$new_number = cleanRow($number);
 				echo $number,' => ',$new_number,' <br>';
 			}
 		}
