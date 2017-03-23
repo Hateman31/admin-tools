@@ -27,6 +27,7 @@ if ( isset($_FILES['uploadfile']) ){
 			$number = $row[$column_num];
 			if (strlen($number)) {
 				$new_number = cleanRow($number);
+				//~ 7 (391) 256-76-89 +7 (960) 759-95-75 => 7391256768979607599575 
 				echo $number,' => ',$new_number,' <br>';
 			}
 		}
